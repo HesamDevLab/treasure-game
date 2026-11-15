@@ -1,0 +1,1106 @@
+/* =========================
+   تنظیمات اصلی
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --gold: #ffd700;
+    --gold-light: #fff0a3;
+    --blue: #162747;
+    --dark: #070b18;
+}
+
+body {
+    background: #070b18;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* =========================
+   پس زمینه متحرک
+========================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: -50%;
+    z-index: -2;
+
+    background:
+        radial-gradient(circle at 20% 30%,
+        #164b8a66, transparent 30%),
+
+        radial-gradient(circle at 80% 70%,
+        #a8790b44, transparent 30%),
+
+        radial-gradient(circle at 50% 50%,
+        #142d58, transparent 60%);
+
+    animation: backgroundMove 18s ease-in-out infinite alternate;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(2px 2px at 20% 30%, #ffffff88 50%, transparent),
+        radial-gradient(2px 2px at 70% 20%, #ffd70099 50%, transparent),
+        radial-gradient(3px 3px at 40% 80%, #ffffff77 50%, transparent),
+        radial-gradient(2px 2px at 90% 60%, #ffd70088 50%, transparent),
+        radial-gradient(2px 2px at 10% 90%, #ffffff88 50%, transparent);
+
+    background-size: 250px 250px;
+    animation: starsMove 30s linear infinite;
+}
+
+@keyframes backgroundMove {
+    0% {
+        transform: translate(-5%, -3%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(5%, 3%) rotate(8deg);
+    }
+}
+
+@keyframes starsMove {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 250px 500px;
+    }
+}
+
+/* =========================
+   ظرف اصلی بازی
+========================= */
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 40px 25px;
+
+    background: rgba(12, 22, 43, 0.82);
+
+    border: 1px solid #d4af3788;
+    border-radius: 25px;
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 0 30px #d4af3722,
+        0 0 80px #164b8a22,
+        inset 0 0 30px #ffffff05;
+
+    animation: containerEnter 1s ease;
+}
+
+@keyframes containerEnter {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =========================
+   عنوان بازی
+========================= */
+
+h1 {
+    color: var(--gold);
+    font-size: 38px;
+    margin-bottom: 15px;
+
+    text-shadow:
+        0 0 10px #ffd70088,
+        0 0 30px #ffd70055,
+        0 0 60px #ffd70033;
+
+    animation: titleGlow 3s infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 0 0 10px #ffd70066;
+    }
+
+    to {
+        text-shadow:
+            0 0 20px #ffd700,
+            0 0 45px #ffd70099;
+    }
+}
+
+.subtitle {
+    color: #b9c9e9;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+}
+
+/* =========================
+   پنل ساخت مسابقه
+========================= */
+
+.player-panel {
+    background: linear-gradient(
+        145deg,
+        #1b3154,
+        #101a30
+    );
+
+    border: 1px solid #d4af3788;
+    border-radius: 20px;
+
+    padding: 30px;
+    margin: 30px 0;
+
+    box-shadow: 0 0 25px #d4af3718;
+}
+
+.player-panel h2 {
+    color: var(--gold);
+    margin-bottom: 25px;
+}
+
+.player-panel label {
+    display: block;
+    margin-bottom: 12px;
+    color: #c5cbe0;
+}
+
+#playerCount,
+.player-input {
+    width: 80%;
+    max-width: 350px;
+
+    padding: 14px;
+
+    border-radius: 12px;
+    border: 1px solid #d4af37;
+
+    background: #0b1428;
+    color: white;
+
+    font-size: 16px;
+    text-align: center;
+
+    margin-bottom: 15px;
+
+    outline: none;
+    transition: 0.3s;
+}
+
+#playerCount:focus,
+.player-input:focus {
+    border-color: #fff0a3;
+
+    box-shadow:
+        0 0 10px #ffd70055,
+        0 0 25px #ffd70022;
+}
+
+.player-input::placeholder {
+    color: #8492ad;
+}
+
+/* =========================
+   دکمه ها
+========================= */
+
+button {
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.player-panel button,
+.restart,
+.shop-button {
+    background: linear-gradient(
+        135deg,
+        #b88a19,
+        #ffe68a,
+        #d4af37
+    );
+
+    color: #11182b;
+
+    border: none;
+    border-radius: 12px;
+
+    padding: 14px 30px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    box-shadow: 0 5px 20px #d4af3733;
+}
+
+.player-panel button {
+    display: block;
+    margin: 15px auto 0;
+}
+
+.player-panel button:hover,
+.restart:hover,
+.shop-button:hover {
+    transform: translateY(-4px) scale(1.04);
+
+    box-shadow:
+        0 8px 25px #ffd70066;
+}
+
+/* =========================
+   اطلاعات بازیکن
+========================= */
+
+#currentPlayer {
+    color: var(--gold);
+    margin: 25px 0 10px;
+    font-size: 27px;
+}
+
+#turnInfo {
+    color: #b9c9e9;
+    margin-bottom: 15px;
+}
+
+.round-progress {
+    display: inline-block;
+
+    background: linear-gradient(
+        135deg,
+        #263f68,
+        #142440
+    );
+
+    border: 1px solid #d4af37;
+
+    color: #ffdf70;
+
+    padding: 13px 28px;
+    border-radius: 12px;
+
+    margin: 10px 0;
+
+    font-weight: bold;
+
+    box-shadow: 0 0 20px #d4af3722;
+}
+
+/* =========================
+   کارت های آمار
+========================= */
+
+.stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 15px;
+    margin: 35px 0;
+}
+
+.box {
+    background: linear-gradient(
+        145deg,
+        #243b61,
+        #111e38
+    );
+
+    padding: 22px;
+
+    border-radius: 18px;
+    width: 160px;
+
+    border: 1px solid #d4af3777;
+
+    box-shadow:
+        0 5px 20px #00000044,
+        inset 0 0 15px #ffffff05;
+
+    transition: 0.3s;
+
+    animation: cardEnter 0.7s ease backwards;
+}
+
+.box:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.box:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.box:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+@keyframes cardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.box:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 10px 25px #d4af3733;
+}
+
+.box span {
+    color: #c5cbe0;
+    font-size: 14px;
+}
+
+.box h2 {
+    color: var(--gold);
+    margin-top: 12px;
+    font-size: 32px;
+
+    text-shadow: 0 0 15px #ffd70055;
+}
+
+/* =========================
+   پیام بازی
+========================= */
+
+#message {
+    color: var(--gold-light);
+
+    margin: 35px 0;
+
+    min-height: 30px;
+
+    font-size: 18px;
+
+    text-shadow: 0 0 12px #ffd70044;
+}
+
+/* =========================
+   صندوق های گنج
+========================= */
+
+.chests {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 18px;
+    margin: 40px 0;
+}
+
+.chest {
+    position: relative;
+
+    background: linear-gradient(
+        145deg,
+        #36517c,
+        #101b32
+    );
+
+    border: 2px solid #d4af37;
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    font-size: 42px;
+
+    box-shadow:
+        0 8px 0 #080d19,
+        0 12px 25px #00000077,
+        inset 0 0 15px #ffffff11;
+
+    transition: 0.3s;
+}
+
+.chest:hover:not(:disabled) {
+    transform: translateY(-10px) scale(1.1);
+
+    box-shadow:
+        0 12px 0 #080d19,
+        0 0 25px #ffd70077;
+
+    border-color: #fff0a3;
+}
+
+.chest:disabled {
+    cursor: not-allowed;
+    opacity: 0.9;
+}
+
+/* تکان خوردن صندوق اشتباه */
+
+.chest.shake {
+    animation: shake 0.45s ease;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    20%, 60% {
+        transform: translateX(-8px);
+    }
+
+    40%, 80% {
+        transform: translateX(8px);
+    }
+}
+
+/* پیدا کردن گنج */
+
+.chest.win {
+    animation: treasureWin 0.9s ease;
+
+    border-color: #fff3a3;
+
+    box-shadow:
+        0 0 20px gold,
+        0 0 50px #ffd70099,
+        0 0 100px #ffd70044;
+}
+
+@keyframes treasureWin {
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.4) rotate(10deg);
+    }
+
+    60% {
+        transform: scale(0.9) rotate(-10deg);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* حذف صندوق */
+
+.chest.removing {
+    animation: chestRemove 0.5s ease forwards;
+}
+
+@keyframes chestRemove {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.3) rotate(15deg);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   دکمه مرحله بعد
+========================= */
+
+.restart {
+    margin-top: 15px;
+    padding: 15px 35px;
+    font-size: 17px;
+}
+
+/* =========================
+   فروشگاه
+========================= */
+
+.shop {
+    background: linear-gradient(
+        145deg,
+        #1b3154,
+        #101a30
+    );
+
+    border: 1px solid #d4af3788;
+
+    border-radius: 20px;
+
+    padding: 25px;
+    margin-top: 35px;
+
+    box-shadow: 0 0 25px #d4af3718;
+}
+
+.shop h2 {
+    color: var(--gold);
+    margin-bottom: 15px;
+}
+
+.shop p {
+    color: #c5cbe0;
+    margin-bottom: 18px;
+}
+
+.shop-button {
+    padding: 13px 25px;
+    font-size: 15px;
+}
+
+/* =========================
+   نتایج مسابقه
+========================= */
+
+#resultArea {
+    margin-top: 35px;
+
+    padding: 25px 15px;
+
+    background: linear-gradient(
+        145deg,
+        #1b3154,
+        #101a30
+    );
+
+    border: 1px solid #d4af37;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 30px #d4af3733;
+
+    animation: resultEnter 0.8s ease;
+}
+
+@keyframes resultEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#resultArea h2 {
+    color: var(--gold);
+    margin-bottom: 20px;
+}
+
+#winnerMessage {
+    color: #ffdf70;
+    margin: 20px 0;
+    font-size: 22px;
+
+    text-shadow: 0 0 20px #ffd70055;
+}
+
+/* جدول نتایج */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+th,
+td {
+    padding: 14px 8px;
+    border-bottom: 1px solid #405071;
+}
+
+th {
+    color: #ffd700;
+    background: #0b1428;
+}
+
+td {
+    color: #e1e7f5;
+}
+
+#resultBody tr {
+    transition: 0.3s;
+}
+
+#resultBody tr:hover {
+    background: #ffffff0c;
+}
+
+#resultBody tr:first-child td {
+    color: #ffdf70;
+    font-weight: bold;
+}
+
+/* =========================
+   فوتر
+========================= */
+
+.footer {
+    margin-top: 40px;
+    color: #8492ad;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+/* =========================
+   موبایل
+========================= */
+
+@media (max-width: 480px) {
+
+    h1 {
+        font-size: 27px;
+    }
+
+    .container {
+        margin-top: 20px;
+        padding: 25px 12px;
+    }
+
+    .chest {
+        padding: 16px;
+        font-size: 35px;
+    }
+
+    .box {
+        width: 135px;
+        padding: 16px 8px;
+    }
+
+    th,
+    td {
+        font-size: 11px;
+        padding: 12px 4px;
+    }
+
+    #currentPlayer {
+        font-size: 22px;
+    }
+
+    #message {
+        font-size: 15px;
+    }
+}
+
+/* کاهش انیمیشن برای کسانی که آن را غیرفعال کرده‌اند */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+/* ==========================
+   NEON ARCADE BACKGROUND
+========================== */
+
+body {
+    background:
+        radial-gradient(ellipse at 15% 20%, #4420a855, transparent 35%),
+        radial-gradient(ellipse at 85% 75%, #00d9ff33, transparent 35%),
+        linear-gradient(135deg, #050816, #0b1028 50%, #09051c);
+
+    overflow-x: hidden;
+}
+
+/* پس زمینه شبکه ای */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(#00eaff0c 1px, transparent 1px),
+        linear-gradient(90deg, #00eaff0c 1px, transparent 1px);
+
+    background-size: 45px 45px;
+}
+
+/* ستاره های ثابت */
+
+body::after {
+    content: "✦       ·          ✧          ·       ✦";
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    width: 90%;
+    color: #00eaff88;
+    font-size: 25px;
+    letter-spacing: 35px;
+    z-index: -1;
+    pointer-events: none;
+
+    animation: neonStars 5s ease-in-out infinite alternate;
+}
+
+@keyframes neonStars {
+    from {
+        opacity: 0.25;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0.8;
+        transform: translateY(18px);
+    }
+}
+
+/* ==========================
+   شخصیت های اطراف بازی
+========================== */
+
+.container {
+    position: relative;
+}
+
+/* شخصیت سمت راست */
+
+.container::before {
+    content: "👾";
+
+    position: fixed;
+    right: 3%;
+    top: 35%;
+
+    font-size: 65px;
+
+    opacity: 0.75;
+
+    filter: drop-shadow(0 0 12px #00eaff);
+
+    animation: characterFloat 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* شخصیت سمت چپ */
+
+.container::after {
+    content: "🧑‍🚀";
+
+    position: fixed;
+    left: 3%;
+    bottom: 20%;
+
+    font-size: 65px;
+
+    opacity: 0.75;
+
+    filter: drop-shadow(0 0 12px #b44aff);
+
+    animation: characterFloat 5s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes characterFloat {
+    0% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-18px) rotate(5deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+}
+
+/* ==========================
+   پنل نئونی
+========================== */
+
+.container {
+    background: rgba(8, 13, 35, 0.94);
+
+    border: 1px solid #00eaff88;
+
+    box-shadow:
+        0 0 15px #00eaff22,
+        0 0 35px #713cff22;
+}
+
+/* عنوان نئونی */
+
+h1 {
+    color: #00eaff;
+
+    text-shadow:
+        0 0 5px #00eaff,
+        0 0 15px #00eaff,
+        0 0 35px #0077ff;
+}
+
+/* کارت ها */
+
+.box,
+.shop,
+.player-panel,
+#resultArea {
+    background: linear-gradient(
+        145deg,
+        #151c42,
+        #0a1028
+    );
+
+    border: 1px solid #8655ff88;
+
+    box-shadow:
+        0 0 12px #713cff22,
+        inset 0 0 15px #00eaff08;
+}
+
+/* صندوق ها */
+
+.chest {
+    background: linear-gradient(
+        145deg,
+        #172b59,
+        #10102c
+    );
+
+    border: 2px solid #00eaff;
+
+    box-shadow:
+        0 0 10px #00eaff55,
+        inset 0 0 15px #00eaff22;
+}
+
+.chest:hover:not(:disabled) {
+    border-color: #ff42e6;
+
+    box-shadow:
+        0 0 15px #00eaff,
+        0 0 35px #a832ff88;
+}
+
+/* دکمه ها */
+
+.restart,
+.shop-button,
+.player-panel button {
+    background: linear-gradient(
+        120deg,
+        #00cfff,
+        #8252ff,
+        #ed3be7
+    );
+
+    color: white;
+
+    box-shadow:
+        0 0 12px #00d9ff66;
+}
+
+.restart:hover,
+.shop-button:hover,
+.player-panel button:hover {
+    box-shadow:
+        0 0 15px #00eaff,
+        0 0 30px #a832ff88;
+}
+
+/* آمار */
+
+.box h2 {
+    color: #00eaff;
+
+    text-shadow:
+        0 0 10px #00eaff88;
+}
+
+/* متن ها */
+
+#currentPlayer,
+#message,
+.round-progress h2 {
+    color: #00eaff;
+}
+
+.round-progress {
+    border-color: #00eaff;
+    background: #101b3b;
+}
+
+/* موبایل */
+
+@media (max-width: 650px) {
+
+    .container::before {
+        right: 1%;
+        top: 12%;
+        font-size: 35px;
+    }
+
+    .container::after {
+        left: 1%;
+        bottom: 5%;
+        font-size: 35px;
+    }
+
+}
+/* DARK NEON GAMING BACKGROUND */
+
+body {
+    background:
+        radial-gradient(ellipse at 15% 30%, #14264d 0%, transparent 40%),
+        radial-gradient(ellipse at 85% 70%, #35104b 0%, transparent 40%),
+        #050509 !important;
+
+    color: white;
+    overflow-x: hidden;
+}
+
+/* NEON LIGHTS */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 30%,
+            rgba(0, 140, 255, 0.08),
+            transparent 70%
+        );
+
+    animation: neonLight 7s ease-in-out infinite alternate;
+}
+
+@keyframes neonLight {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}
+
+/* WARRIOR CHARACTER */
+
+body::after {
+    content: "⚔";
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+
+    font-size: 180px;
+    color: rgba(0, 174, 255, 0.13);
+
+    text-shadow:
+        0 0 20px #008cff,
+        0 0 60px #0055ff;
+
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* GAME PANEL */
+
+.container {
+    background: rgba(5, 8, 20, 0.88) !important;
+    border: 1px solid rgba(0, 174, 255, 0.35);
+
+    box-shadow:
+        0 0 20px rgba(0, 100, 255, 0.15),
+        0 0 50px rgba(120, 0, 255, 0.1);
+}
+
+/* NEON TITLES */
+
+h1, h2, h3 {
+    color: #fff !important;
+    text-shadow:
+        0 0 8px #008cff,
+        0 0 20px #6b00ff;
+}
+
+/* BUTTONS */
+
+button {
+    border: 1px solid #168cff !important;
+    background: linear-gradient(135deg, #101c38, #241044) !important;
+    color: white !important;
+
+    box-shadow: 0 0 10px rgba(0, 140, 255, 0.25);
+
+    transition: 0.2s ease;
+}
+
+button:hover {
+    box-shadow:
+        0 0 12px #008cff,
+        0 0 25px #6b00ff;
+
+    transform: translateY(-2px);
+}
+body {
+    background-color: #050509;
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.75)
+        ),
+        url("kratos.png");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #050509;
+}
+.brand {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    color: #8b9bbd;
+    margin-bottom: 12px;
+    text-shadow: 0 0 10px #008cff;
+}
+
+.brand span {
+    color: #00c8ff;
+}
